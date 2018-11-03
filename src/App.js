@@ -25,9 +25,9 @@ class App extends Component {
 
   handleClick = id => {
     if (this.state.clicked.indexOf(id) === -1) {
-      this.handleIncrement();
-      this.setState({ clicked: this.state.clicked.concat(id) });
       this.setState({ message: "" });
+      this.setState({ clicked: this.state.clicked.concat(id) });
+      this.handleIncrement();
     } else {
       this.handleReset();
     }
@@ -35,13 +35,15 @@ class App extends Component {
 
   handleIncrement = () => {
     const newScore = this.state.currentScore + 1;
+    console.log(newScore);
     this.setState({
       currentScore: newScore,
     });
     if (newScore >= this.state.topScore) {
       this.setState({ topScore: newScore });
     }
-    else if (newScore === 12) {
+    if (newScore === 12) {
+      console.log("Are we running this?")
       this.setState({ message: "Congratulations! You win!" });
     }
     this.handleShuffle();
